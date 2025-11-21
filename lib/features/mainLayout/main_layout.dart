@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies/core/resources/assets_manager.dart';
 import 'package:movies/core/resources/colors_manager.dart';
 import 'package:movies/features/mainLayout/home/presentation/screens/home_screen.dart';
@@ -25,49 +26,58 @@ class _MainLayoutState extends State<MainLayout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       body: tabs[selectedIndex],
       bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
 
   Widget _buildBottomNavigationBar() {
-    return BottomNavigationBar(
-      currentIndex: selectedIndex,
-      onTap: _onTab,
-      items: [
-        BottomNavigationBarItem(
-          icon: Image.asset(AssetsManager.homeIcon),
-          label: "Home",
-          activeIcon: Image.asset(
-            AssetsManager.homeIcon,
-            color: ColorsManager.yellow,
+    return SafeArea(
+      child: Padding(
+        padding:EdgeInsets.all(8.sp),
+        child: ClipRRect(
+          borderRadius: BorderRadiusGeometry.circular(20.r),
+          child: BottomNavigationBar(
+            currentIndex: selectedIndex,
+            onTap: _onTab,
+            items: [
+              BottomNavigationBarItem(
+                icon: Image.asset(AssetsManager.homeIcon),
+                label: "Home",
+                activeIcon: Image.asset(
+                  AssetsManager.homeIcon,
+                  color: ColorsManager.yellow,
+                ),
+              ),
+              BottomNavigationBarItem(
+                icon: Image.asset(AssetsManager.searchIcon),
+                label: "Search",
+                activeIcon: Image.asset(
+                  AssetsManager.searchIcon,
+                  color: ColorsManager.yellow,
+                ),
+              ),
+              BottomNavigationBarItem(
+                icon: Image.asset(AssetsManager.browseIcon),
+                label: "Browse",
+                activeIcon: Image.asset(
+                  AssetsManager.browseIcon,
+                  color: ColorsManager.yellow,
+                ),
+              ),
+              BottomNavigationBarItem(
+                icon: Image.asset(AssetsManager.profileIcon),
+                label: "Profile",
+                activeIcon: Image.asset(
+                  AssetsManager.profileIcon,
+                  color: ColorsManager.yellow,
+                ),
+              ),
+            ],
           ),
         ),
-        BottomNavigationBarItem(
-          icon: Image.asset(AssetsManager.searchIcon),
-          label: "Search",
-          activeIcon: Image.asset(
-            AssetsManager.searchIcon,
-            color: ColorsManager.yellow,
-          ),
-        ),
-        BottomNavigationBarItem(
-          icon: Image.asset(AssetsManager.browseIcon),
-          label: "Browse",
-          activeIcon: Image.asset(
-            AssetsManager.browseIcon,
-            color: ColorsManager.yellow,
-          ),
-        ),
-        BottomNavigationBarItem(
-          icon: Image.asset(AssetsManager.profileIcon),
-          label: "Profile",
-          activeIcon: Image.asset(
-            AssetsManager.profileIcon,
-            color: ColorsManager.yellow,
-          ),
-        ),
-      ],
+      ),
     );
   }
 
